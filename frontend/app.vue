@@ -1,18 +1,6 @@
 <template>
-  <div>
-    <v-container>
-      <v-btn
-        depressed
-        color="primary"
-      >
-        test1
-      </v-btn>
-      <v-btn
-        depressed
-        color="error"
-      >
-        test2
-      </v-btn>
-    </v-container>
-  </div>
+  <NuxtLayout>
+    <Header />
+    <NuxtPage />
+  </NuxtLayout>
 </template>
