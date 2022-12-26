@@ -1,14 +1,7 @@
-import { defineNuxtConfig } from 'nuxt/config'
+import { defineNuxtConfig } from "nuxt";
 
-// https://nuxt.com/docs/api/configuration/nuxt-config
+// https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
-  css: ['vuetify/lib/styles/main.sass'],
-  build: {
-    transpile: ['vuetify'],
-  },
-  vite: {
-    define: {
-      'process.env.DEBUG': false,
-    }
-  },
-})
+  buildModules: ["@nuxtjs/tailwindcss"],
+  css: ["@/assets/css/tailwind.css"],
+});
