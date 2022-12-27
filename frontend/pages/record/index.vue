@@ -32,18 +32,21 @@
             記録画面
           </h2>
           <div class="flex items-center justify-center mt-4">
+            <!-- TODO:NuxtLink使用して、リンクを作成 -->
             <a
               href="http://localhost:3000"
               class="px-4 py-2 my-2 text-gray-800 uppercase bg-transparent border-2 border-gray-800 md:mt-16 dark:text-gray-800 dark:bg-white hover:dark:bg-gray-100 dark:text-white hover:bg-gray-800 hover:text-white text-md"
             >
               トップ画面に戻るボタン
             </a>
+            <!-- TODO:NuxtLink使用して、リンクを作成 -->
             <a
               href="http://localhost:3000/detail"
               class="px-4 py-2 my-2 text-gray-800 uppercase bg-transparent border-2 border-gray-800 md:mt-16 dark:text-gray-800 dark:bg-white hover:dark:bg-gray-100 dark:text-white hover:bg-gray-800 hover:text-white text-md"
             >
               朝起きた時間を記録するボタン
             </a>
+            <!-- TODO:NuxtLink使用して、リンクを作成 -->
             <a
               href="http://localhost:3000/detail"
               class="px-4 py-2 my-2 text-gray-800 uppercase bg-transparent border-2 border-gray-800 md:mt-16 dark:text-gray-800 dark:bg-white hover:dark:bg-gray-100 dark:text-white hover:bg-gray-800 hover:text-white text-md"
