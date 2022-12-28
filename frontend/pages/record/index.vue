@@ -1,7 +1,5 @@
 <template>
-  <main
-    class="relative h-screen overflow-hidden font-mono bg-white dark:bg-gray-800"
-  >
+  <main class="relative h-screen overflow-hidden font-mono bg-white">
     <div class="absolute hidden md:block -bottom-32 -left-32 w-96 h-96">
       <div
         class="absolute z-20 text-xl text-extrabold right-12 text-start top-1/4"
@@ -27,26 +25,26 @@
       >
         <div class="flex flex-col">
           <h2
-            class="max-w-3xl py-2 mx-auto text-5xl font-bold text-center text-gray-800 md:text-3xl dark:text-white"
+            class="max-w-3xl py-2 mx-auto text-5xl font-bold text-center text-gray-800 md:text-3xl"
           >
             記録画面
           </h2>
           <div class="flex items-center justify-center mt-4">
             <NuxtLink
               to="http://localhost:3000"
-              class="px-4 py-2 my-2 text-gray-800 uppercase bg-transparent border-2 border-gray-800 md:mt-16 dark:text-gray-800 dark:bg-white hover:dark:bg-gray-100 dark:text-white hover:bg-gray-800 hover:text-white text-md"
+              class="px-4 py-2 my-2 text-gray-800 uppercase bg-transparent border-2 border-gray-800 md:mt-16 hover:bg-gray-800 hover:text-white text-md"
             >
               トップ画面
             </NuxtLink>
             <NuxtLink
               to="http://localhost:3000/detail"
-              class="px-4 py-2 my-2 text-gray-800 uppercase bg-transparent border-2 border-gray-800 md:mt-16 dark:text-gray-800 dark:bg-white hover:dark:bg-gray-100 dark:text-white hover:bg-gray-800 hover:text-white text-md"
+              class="px-4 py-2 my-2 text-gray-800 uppercase bg-transparent border-2 border-gray-800 md:mt-16 hover:bg-gray-800 hover:text-white text-md"
             >
               起床時間を記録後、詳細画面
             </NuxtLink>
             <NuxtLink
               to="http://localhost:3000/detail"
-              class="px-4 py-2 my-2 text-gray-800 uppercase bg-transparent border-2 border-gray-800 md:mt-16 dark:text-gray-800 dark:bg-white hover:dark:bg-gray-100 dark:text-white hover:bg-gray-800 hover:text-white text-md"
+              class="px-4 py-2 my-2 text-gray-800 uppercase bg-transparent border-2 border-gray-800 md:mt-16 hover:bg-gray-800 hover:text-white text-md"
             >
               詳細画面
             </NuxtLink>
