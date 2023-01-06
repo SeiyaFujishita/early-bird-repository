@@ -1,3 +1,55 @@
+<script setup lang="ts">
+const time = ref(0);
+const status = ref(0);
+const startTime = ref(0);
+const stopTime = ref(0);
+const timer = ref(0);
+const getTimeStr = () => {
+  // 1秒 = 1000ミリ秒
+  // 1分 = 60 * 1000ミリ秒
+  // 1時間 = 60 * 60 * 1000ミリ秒
+  const calcSeconds = Math.floor((time.value / 1000) % 60);
+  const calcMinutes = Math.floor((time.value / (60 * 1000)) % 60);
+  const calcHours = Math.floor(time.value / (60 * 60 * 1000));
+
+  const seconds = ("0" + calcSeconds).slice(-2);
+  const minutes = ("0" + calcMinutes).slice(-2);
+  const hours = calcHours < 100 ? ("0" + calcHours).slice(-2) : calcHours;
+
+  return `${hours}:${minutes}:${seconds}`;
+};
+
+const start = () => {
+  status.value = 1;
+
+  if (startTime.value === 0) {
+    startTime.value = Date.now();
+  }
+
+  const checkTime = () => {
+    time.value = Date.now() - startTime.value + stopTime.value;
+  };
+  timer.value = window.setInterval(checkTime, 10);
+};
+
+const stop = () => {
+  if (timer.value) {
+    clearInterval(timer.value);
+  }
+
+  status.value = 2;
+  startTime.value = 0;
+  stopTime.value = time.value;
+};
+
+const reset = () => {
+  stop();
+  status.value = 0;
+  time.value = 0;
+  startTime.value = 0;
+  stopTime.value = 0;
+};
+</script>
 <template>
   <main class="relative h-screen overflow-hidden font-mono bg-white">
     <div class="absolute hidden md:block -bottom-32 -left-32 w-96 h-96">
@@ -54,26 +106,29 @@
           <div
             class="bg-gray-20 border-8 border-gray-600 p-2 rounded-full h-72 w-72 flex items-center justify-center shadow-lg mt-20"
           >
-            <h1 class="text-5xl text-gray-800">00:00:00</h1>
+            <h1 class="text-5xl text-gray-800">{{ getTimeStr() }}</h1>
           </div>
           <div class="flex items-center justify-center">
-            <div
-              v-if="true"
+            <button
+              v-if="status !== 1"
+              @click="start()"
               class="px-4 py-2 m-2 text-gray-800 uppercase bg-transparent border-2 border-gray-800 mt-6 hover:bg-gray-800 hover:text-white text-md"
             >
               START
-            </div>
-            <div
-              v-if="false"
-              class="px-4 py-2 text-gray-800 uppercase bg-transparent border-2 border-gray-800 mt-6 hover:bg-gray-800 hover:text-white text-md"
+            </button>
+            <button
+              v-else
+              @click="stop()"
+              class="px-4 py-2 m-2 text-gray-800 uppercase bg-transparent border-2 border-gray-800 mt-6 hover:bg-gray-800 hover:text-white text-md"
             >
               STOP
-            </div>
-            <div
+            </button>
+            <button
+              @click="reset()"
               class="px-4 py-2 m-2 text-gray-800 uppercase bg-transparent border-2 border-gray-800 mt-6 hover:bg-gray-800 hover:text-white text-md"
             >
               RESET
-            </div>
+            </button>
           </div>
         </div>
       </div>
