@@ -19,35 +19,61 @@
         ></path>
       </svg>
     </div>
-    <div class="relative z-20 flex items-center py-60">
+    <div class="relative z-20 flex items-center py-10">
       <div
         class="container relative flex flex-col items-center justify-between px-6 py-4 mx-auto"
       >
-        <div class="flex flex-col">
+        <div class="flex flex-col justify-center">
           <h2
-            class="max-w-3xl py-2 mx-auto text-5xl font-bold text-center text-gray-800 md:text-3xl"
+            class="max-w-3xl py-2 mx-auto text-5xl font-bold text-gray-800 md:text-3xl"
           >
-            記録画面
+            WakeUpTime　　{{ "20:00" }}
           </h2>
-          <div class="flex items-center justify-center mt-4">
-            <NuxtLink
-              to="http://localhost:3000"
-              class="px-4 py-2 my-2 text-gray-800 uppercase bg-transparent border-2 border-gray-800 md:mt-16 hover:bg-gray-800 hover:text-white text-md"
+          <div class="inline-block relative w-72 mt-10">
+            <select
+              class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
             >
-              トップ画面
-            </NuxtLink>
-            <NuxtLink
-              to="http://localhost:3000/detail"
-              class="px-4 py-2 my-2 text-gray-800 uppercase bg-transparent border-2 border-gray-800 md:mt-16 hover:bg-gray-800 hover:text-white text-md"
+              <option>select Todo</option>
+              <option>Option 2</option>
+              <option>Option 3</option>
+            </select>
+            <div
+              class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
             >
-              起床時間を記録後、詳細画面
-            </NuxtLink>
-            <NuxtLink
-              to="http://localhost:3000/detail"
-              class="px-4 py-2 my-2 text-gray-800 uppercase bg-transparent border-2 border-gray-800 md:mt-16 hover:bg-gray-800 hover:text-white text-md"
+              <svg
+                class="fill-current h-4 w-4"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+              >
+                <path
+                  d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+                />
+              </svg>
+            </div>
+          </div>
+          <div
+            class="bg-gray-20 border-8 border-gray-600 p-2 rounded-full h-72 w-72 flex items-center justify-center shadow-lg mt-20"
+          >
+            <h1 class="text-5xl text-gray-800">00:00:00</h1>
+          </div>
+          <div class="flex items-center justify-center">
+            <div
+              v-if="true"
+              class="px-4 py-2 m-2 text-gray-800 uppercase bg-transparent border-2 border-gray-800 mt-6 hover:bg-gray-800 hover:text-white text-md"
             >
-              詳細画面
-            </NuxtLink>
+              START
+            </div>
+            <div
+              v-if="false"
+              class="px-4 py-2 text-gray-800 uppercase bg-transparent border-2 border-gray-800 mt-6 hover:bg-gray-800 hover:text-white text-md"
+            >
+              STOP
+            </div>
+            <div
+              class="px-4 py-2 m-2 text-gray-800 uppercase bg-transparent border-2 border-gray-800 mt-6 hover:bg-gray-800 hover:text-white text-md"
+            >
+              RESET
+            </div>
           </div>
         </div>
       </div>
