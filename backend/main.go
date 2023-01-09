@@ -40,8 +40,8 @@ func main() {
 	// usecase初期化処理
 	server.NewApiServer(router, repos)
 
-	router.Run()
 	log.Print("server start!")
+	router.Run()
 }
 
 func setCors(r *gin.Engine) {
