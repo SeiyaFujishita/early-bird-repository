@@ -1,8 +1,9 @@
 package usecase
 
 import (
-	"backend/domain/model"
 	"backend/domain/repository"
+	"log"
+	"net/http"
 
 	"github.com/gin-gonic/gin"
 )
@@ -17,6 +18,14 @@ func NewTaskUsecase(repo repository.TaskRepository) *TaskUsecase {
 	}
 }
 
-func (u *TaskUsecase) ListTasks(c *gin.Context) ([]*model.Task, error) {
-	return nil, nil
+func (u *TaskUsecase) ListTasks(c *gin.Context) {
+	tasks, err := u.taskRepository.ListTasks()
+
+	if err != nil {
+		log.Fatal(err)
+		c.JSON(http.StatusInternalServerError, err.Error())
+		return
+	}
+
+	c.JSON(http.StatusOK, tasks)
 }
