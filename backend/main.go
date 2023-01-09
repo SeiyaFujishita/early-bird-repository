@@ -31,8 +31,10 @@ func main() {
 		TaskRepository: task.NewTaskRepository(gormHandler),
 	}
 
+	// gin(フレームワーク)の初期化(https://gin-gonic.com/ja/)
 	router := gin.Default()
 
+	// CORS設定(https://www.tohoho-web.com/ex/cors.html)
 	setCors(router)
 
 	// usecase初期化処理
