@@ -52,6 +52,10 @@ const reset = () => {
   stopTime.value = 0;
 };
 
+const save = () => {
+  // ストップウォッチの時間とタスクを保存
+};
+
 const config = useRuntimeConfig();
 const { data: tasks, error } = useFetch<Task[]>(
   config.public.PUBLIC_BACKEND_URL + "tasks"
@@ -113,7 +117,7 @@ if (error.value) {
             </div>
           </div>
           <div
-            class="bg-gray-20 border-8 border-gray-600 p-2 rounded-full h-72 w-72 flex items-center justify-center shadow-lg mt-20"
+            class="bg-gray-20 border-8 border-gray-600 p-2 rounded-full h-72 w-72 flex items-center justify-center shadow-lg mt-10"
           >
             <h1 class="text-5xl text-gray-800">{{ getTimeStr() }}</h1>
           </div>
@@ -137,6 +141,12 @@ if (error.value) {
               class="px-4 py-2 m-2 text-gray-800 uppercase bg-transparent border-2 border-gray-800 mt-6 hover:bg-gray-800 hover:text-white text-md"
             >
               RESET
+            </button>
+            <button
+              @click="save()"
+              class="px-4 py-2 m-2 text-gray-800 uppercase bg-transparent border-2 border-gray-800 mt-6 hover:bg-gray-800 hover:text-white text-md"
+            >
+              SAVE
             </button>
           </div>
         </div>
