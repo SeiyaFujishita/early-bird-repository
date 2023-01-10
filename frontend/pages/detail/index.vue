@@ -3,10 +3,7 @@
     <div class="absolute hidden md:block -bottom-32 -left-32 w-96 h-96">
       <div
         class="absolute z-20 text-xl text-extrabold right-12 text-start top-1/4"
-      >
-        <span class="text-7xl"> 🌱 </span>
-        <p>おはようございます</p>
-      </div>
+      ></div>
       <svg
         viewBox="0 0 200 200"
         class="absolute w-full h-full"

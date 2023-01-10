@@ -1,12 +1,10 @@
+<script setup></script>
 <template>
   <main class="relative h-screen overflow-hidden font-mono bg-white">
     <div class="absolute hidden md:block -bottom-32 -left-32 w-96 h-96">
       <div
         class="absolute z-20 text-xl text-extrabold right-12 text-start top-1/4"
-      >
-        <span class="text-7xl"> 🌱 </span>
-        <p>おはようございます</p>
-      </div>
+      ></div>
       <svg
         viewBox="0 0 200 200"
         class="absolute w-full h-full"
@@ -23,6 +21,18 @@
       <div
         class="container relative flex flex-col items-center justify-between px-6 py-4 mx-auto"
       >
+        <div class="name-input mb-12 border-2 border-gray-800">
+          <form @submit.prevent>
+            <label>
+              <input
+                v-model="name"
+                placeholder="名前を入力してください"
+                type="text"
+                @keyup.enter="submit"
+              />
+            </label>
+          </form>
+        </div>
         <div class="flex flex-col">
           <h2
             class="max-w-3xl py-2 mx-auto text-5xl font-bold text-center text-gray-800 md:text-3xl"
@@ -42,3 +52,9 @@
     </div>
   </main>
 </template>
+<style scoped>
+.name-input input {
+  text-align: center;
+}
+</style>
+>
