@@ -61,7 +61,7 @@ const save = () => {
   // ストップウォッチの時間とタスクを保存
   work.time = getTimeStr();
 
-  if ((work.time = "00:00:00")) {
+  if (work.time == "00:00:00") {
     return alert("時間を計測してください。");
   }
   const { error } = useFetch<Work>("http://localhost:8080/work", {
