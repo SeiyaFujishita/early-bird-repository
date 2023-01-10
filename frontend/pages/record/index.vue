@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { Task } from "~/types/task";
+import { Work } from "~/types/work";
 const time = ref(0);
 const status = ref(0);
 const startTime = ref(0);
@@ -51,8 +52,26 @@ const reset = () => {
   stopTime.value = 0;
 };
 
+const work = reactive<Work>({
+  time: "",
+  taskId: 1,
+});
+
 const save = () => {
   // ストップウォッチの時間とタスクを保存
+  work.time = getTimeStr();
+
+  if ((work.time = "00:00:00")) {
+    return alert("時間を計測してください。");
+  }
+  const { error } = useFetch<Work>("http://localhost:8080/work", {
+    method: "POST",
+    body: work,
+  });
+
+  if (error.value) {
+    return alert("入力値が不正です。");
+  }
 };
 
 const config = useRuntimeConfig();
@@ -98,8 +117,9 @@ if (error.value) {
           <div class="inline-block relative w-72 mt-10">
             <select
               class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
+              v-model="work.taskId"
             >
-              <option v-for="t in tasks">{{ t.name }}</option>
+              <option v-for="t in tasks" :value="t.id">{{ t.name }}</option>
             </select>
             <div
               class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
