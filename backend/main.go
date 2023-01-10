@@ -9,6 +9,7 @@ import (
 	domainrepo "backend/domain/repository"
 
 	"backend/infra/repository/task"
+	"backend/infra/repository/work"
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
@@ -29,6 +30,7 @@ func main() {
 	// リポジトリ初期化処理
 	repos := domainrepo.Repositories{
 		TaskRepository: task.NewTaskRepository(gormHandler),
+		WorkRepository: work.NewWorkRepository(gormHandler),
 	}
 
 	// gin(フレームワーク)の初期化(https://gin-gonic.com/ja/)

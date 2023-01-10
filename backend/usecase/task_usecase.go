@@ -22,7 +22,7 @@ func (u *TaskUsecase) ListTasks(c *gin.Context) {
 	tasks, err := u.taskRepository.ListTasks()
 
 	if err != nil {
-		log.Fatal(err)
+		log.Print(err)
 		c.JSON(http.StatusInternalServerError, err.Error())
 		return
 	}
