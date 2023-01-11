@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { Task } from "~/types/task";
 import { Work } from "~/types/work";
+
+const router = useRouter();
 const time = ref(0);
 const status = ref(0);
 const startTime = ref(0);
@@ -72,6 +74,8 @@ const save = () => {
   if (error.value) {
     return alert("入力値が不正です。");
   }
+
+  router.push("/detail");
 };
 
 const config = useRuntimeConfig();
