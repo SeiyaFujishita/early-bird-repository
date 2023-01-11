@@ -34,11 +34,7 @@
           </form>
         </div>
         <div class="flex flex-col">
-          <h2
-            class="max-w-3xl py-2 mx-auto text-5xl font-bold text-center text-gray-800 md:text-3xl"
-          >
-            ~ 早起きは勤勉ということで人から信頼が得られる ~
-          </h2>
+          <Crousel />
           <div class="flex items-center justify-center mt-4">
             <NuxtLink
               to="http://localhost:3000/record"

@@ -6,4 +6,13 @@ export default defineNuxtConfig({
       PUBLIC_BACKEND_URL: process.env.PUBLIC_BACKEND_URL,
     },
   },
+  app: {
+    head: {
+      script: [
+        {
+          src: "https://cdn.jsdelivr.net/npm/tw-elements/dist/js/index.min.js",
+        },
+      ],
+    },
+  },
 });
