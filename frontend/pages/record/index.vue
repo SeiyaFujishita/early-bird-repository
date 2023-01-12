@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { Task } from "~/types/task";
 import { Work } from "~/types/work";
+
 const time = ref(0);
 const status = ref(0);
 const startTime = ref(0);
@@ -57,11 +58,14 @@ const work = reactive<Work>({
   taskId: 1,
 });
 
+const isShow = ref(true);
+
 const save = () => {
   // ストップウォッチの時間とタスクを保存
   work.time = getTimeStr();
 
   if (work.time == "00:00:00") {
+    isShow.value = false;
     return alert("時間を計測してください。");
   }
   const { error } = useFetch<Work>("http://localhost:8080/work", {
@@ -70,8 +74,11 @@ const save = () => {
   });
 
   if (error.value) {
+    isShow.value = false;
     return alert("入力値が不正です。");
   }
+
+  isShow.value = true;
 };
 
 const config = useRuntimeConfig();
@@ -88,6 +95,7 @@ if (error.value) {
 </script>
 <template>
   <main class="relative h-screen overflow-hidden font-mono bg-white">
+    <FlashMessage :isShow="isShow" />
     <div class="absolute hidden md:block -bottom-32 -left-32 w-96 h-96">
       <div
         class="absolute z-20 text-xl text-extrabold right-12 text-start top-1/4"
@@ -163,7 +171,9 @@ if (error.value) {
             </button>
             <button
               @click="save()"
-              class="px-4 py-2 m-2 text-gray-800 uppercase bg-transparent border-2 border-gray-800 mt-6 hover:bg-gray-800 hover:text-white text-md"
+              class="px-4 py-2 m-2 text-gray-800 uppercase bg-transparent border-2 border-gray-800 mt-6 hover:bg-gray-800 hover:text-white text-md transition duration-150 ease-in-out"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModalCenter"
             >
               SAVE
             </button>
