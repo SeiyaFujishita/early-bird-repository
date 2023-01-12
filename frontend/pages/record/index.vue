@@ -2,6 +2,7 @@
 import { Task } from "~/types/task";
 import { Work } from "~/types/work";
 
+const router = useRouter();
 const time = ref(0);
 const status = ref(0);
 const startTime = ref(0);
@@ -79,6 +80,7 @@ const save = () => {
   }
 
   isShow.value = true;
+  router.push("/detail");
 };
 
 const config = useRuntimeConfig();

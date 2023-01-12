@@ -1,4 +1,9 @@
-<script setup></script>
+<script setup lang="ts">
+const name = ref("");
+const submit = () => {
+  console.log("submit!");
+};
+</script>
 <template>
   <main class="relative h-screen overflow-hidden font-mono bg-white">
     <div class="absolute hidden md:block -bottom-32 -left-32 w-96 h-96">
@@ -21,24 +26,21 @@
       <div
         class="container relative flex flex-col items-center justify-between px-6 py-4 mx-auto"
       >
-        <div class="name-input mb-12 border-2 border-gray-800">
+        <div class="mb-12 border-2 border-gray-800">
           <form @submit.prevent>
             <label>
               <input
                 v-model="name"
                 placeholder="名前を入力してください"
                 type="text"
+                class="text-center"
                 @keyup.enter="submit"
               />
             </label>
           </form>
         </div>
         <div class="flex flex-col">
-          <h2
-            class="max-w-3xl py-2 mx-auto text-5xl font-bold text-center text-gray-800 md:text-3xl"
-          >
-            ~ 早起きは勤勉ということで人から信頼が得られる ~
-          </h2>
+          <Crousel />
           <div class="flex items-center justify-center mt-4">
             <NuxtLink
               to="http://localhost:3000/record"
@@ -52,9 +54,3 @@
     </div>
   </main>
 </template>
-<style scoped>
-.name-input input {
-  text-align: center;
-}
-</style>
->
