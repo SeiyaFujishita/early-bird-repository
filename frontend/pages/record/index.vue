@@ -69,7 +69,10 @@ const save = () => {
     isShow.value = false;
     return alert("時間を計測してください。");
   }
-  const { error } = useFetch<Work>("http://localhost:8080/work", {
+
+  const url = config.public.PUBLIC_BACKEND_URL + "work";
+
+  const { error } = useFetch<Work>(url, {
     method: "POST",
     body: work,
   });
