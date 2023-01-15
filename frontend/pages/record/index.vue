@@ -96,7 +96,7 @@ if (error.value) {
 </script>
 <template>
   <main class="relative h-screen overflow-hidden font-mono bg-white">
-    <Modal />
+    <!-- <Modal /> -->
     <div class="absolute hidden md:block -bottom-32 -left-32 w-96 h-96">
       <div
         class="absolute z-20 text-xl text-extrabold right-12 text-start top-1/4"
