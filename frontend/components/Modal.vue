@@ -1,11 +1,11 @@
 <script setup lang="ts">
-interface Props {
-  isShow: boolean;
-}
-const props = defineProps<Props>();
+// interface Props {
+//   isShow: boolean;
+// }
+// const props = defineProps<Props>();
 </script>
 <template>
-  <div v-if="props.isShow">
+  <div>
     <div
       class="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto"
       id="exampleModalCenter"
