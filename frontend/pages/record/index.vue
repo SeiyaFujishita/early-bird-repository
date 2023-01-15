@@ -55,16 +55,16 @@ const reset = () => {
 };
 
 const active = reactive<Actives>({
-  time: "",
+  time: 0,
   taskId: 1,
   userId: 1,
 });
 
 const save = () => {
   // ストップウォッチの時間とタスクを保存
-  active.time = getTimeStr();
+  active.time = Math.floor((time.value / 1000) % 60);
 
-  if (active.time == "00:00:00") {
+  if (active.time == 0) {
     return alert("時間を計測してください。");
   }
 

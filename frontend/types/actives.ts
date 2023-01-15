@@ -1,5 +1,5 @@
 export type Actives = {
-  time: string;
+  time: number;
   taskId: number;
   userId: number;
 };

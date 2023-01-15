@@ -9,8 +9,8 @@ import (
 
 func NewApiServer(router *gin.Engine, repos repository.Repositories) {
 	taskUsecase := usecase.NewTaskUsecase(repos.TaskRepository)
-	workUsecase := usecase.NewWorkUsecase(repos.WorkRepository)
+	activeUsecase := usecase.NewActiveUsecase(repos.ActiveRepository)
 
 	router.GET("/tasks", func(c *gin.Context) { taskUsecase.ListTasks(c) })
-	router.POST("/work", func(c *gin.Context) { workUsecase.CreateWork(c) })
+	router.POST("/actives", func(c *gin.Context) { activeUsecase.CreateActive(c) })
 }
