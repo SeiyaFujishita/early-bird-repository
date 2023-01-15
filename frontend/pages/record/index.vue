@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Task } from "~/types/task";
-import { Work } from "~/types/work";
+import { Actives } from "~~/types/actives";
 
 const router = useRouter();
 const time = ref(0);
@@ -54,21 +54,25 @@ const reset = () => {
   stopTime.value = 0;
 };
 
-const work = reactive<Work>({
-  time: "",
+const active = reactive<Actives>({
+  time: 0,
   taskId: 1,
+  userId: 1,
 });
 
 const save = () => {
   // ストップウォッチの時間とタスクを保存
-  work.time = getTimeStr();
+  active.time = Math.floor((time.value / 1000) % 60);
 
-  if (work.time == "00:00:00") {
+  if (active.time == 0) {
     return alert("時間を計測してください。");
   }
-  const { error } = useFetch<Work>("http://localhost:8080/work", {
+
+  const url = config.public.PUBLIC_BACKEND_URL + "actives";
+
+  const { error } = useFetch<Actives>(url, {
     method: "POST",
-    body: work,
+    body: active,
   });
 
   if (error.value) {
@@ -92,6 +96,7 @@ if (error.value) {
 </script>
 <template>
   <main class="relative h-screen overflow-hidden font-mono bg-white">
+    <!-- <Modal /> -->
     <div class="absolute hidden md:block -bottom-32 -left-32 w-96 h-96">
       <div
         class="absolute z-20 text-xl text-extrabold right-12 text-start top-1/4"
@@ -121,7 +126,7 @@ if (error.value) {
           <div class="inline-block relative w-72 mt-10">
             <select
               class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
-              v-model="work.taskId"
+              v-model="active.taskId"
             >
               <option v-for="t in tasks" :value="t.id">{{ t.name }}</option>
             </select>
@@ -167,10 +172,19 @@ if (error.value) {
             </button>
             <button
               @click="save()"
-              class="px-4 py-2 m-2 text-gray-800 uppercase bg-transparent border-2 border-gray-800 mt-6 hover:bg-gray-800 hover:text-white text-md"
+              class="px-4 py-2 m-2 text-gray-800 uppercase bg-transparent border-2 border-gray-800 mt-6 hover:bg-gray-800 hover:text-white text-md transition duration-150 ease-in-out"
             >
               SAVE
             </button>
+            <!-- Modal表示 -->
+            <!-- <button
+              @click="save()"
+              class="px-4 py-2 m-2 text-gray-800 uppercase bg-transparent border-2 border-gray-800 mt-6 hover:bg-gray-800 hover:text-white text-md transition duration-150 ease-in-out"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModalCenter"
+            >
+              SAVE
+            </button> -->
           </div>
         </div>
       </div>

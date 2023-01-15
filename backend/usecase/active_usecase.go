@@ -10,20 +10,20 @@ import (
 	"github.com/gin-gonic/gin/binding"
 )
 
-type WorkUsecase struct {
-	workRepository repository.WorkRepository
+type ActiveUsecase struct {
+	activeRepository repository.ActiveRepository
 }
 
-func NewWorkUsecase(repo repository.WorkRepository) *WorkUsecase {
-	return &WorkUsecase{
-		workRepository: repo,
+func NewActiveUsecase(repo repository.ActiveRepository) *ActiveUsecase {
+	return &ActiveUsecase{
+		activeRepository: repo,
 	}
 }
 
-func (u *WorkUsecase) CreateWork(c *gin.Context) {
-	work := &model.Work{}
+func (u *ActiveUsecase) CreateActive(c *gin.Context) {
+	active := &model.Active{}
 
-	err := c.ShouldBindWith(work, binding.JSON)
+	err := c.ShouldBindWith(active, binding.JSON)
 
 	if err != nil {
 		log.Print(err)
@@ -31,7 +31,7 @@ func (u *WorkUsecase) CreateWork(c *gin.Context) {
 		return
 	}
 
-	err = u.workRepository.CreateWork(work)
+	err = u.activeRepository.CreateActive(active)
 
 	if err != nil {
 		log.Print(err)
