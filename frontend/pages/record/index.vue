@@ -93,6 +93,11 @@ if (error.value) {
     message: "failed to tasks",
   });
 }
+
+// 起床時間の取得
+const wakeUpTime = useFetch<Actives>(
+  config.public.PUBLIC_BACKEND_URL + "actives"
+);
 </script>
 <template>
   <main class="relative h-screen overflow-hidden font-mono bg-white">
