@@ -83,21 +83,26 @@ const save = () => {
 };
 
 const config = useRuntimeConfig();
-const { data: tasks, error } = useFetch<Task[]>(
+const { data: tasks, error: taskError } = useFetch<Task[]>(
   config.public.PUBLIC_BACKEND_URL + "tasks"
 );
 
-if (error.value) {
+// 起床時間の取得
+const { data: wakeUpTime, error: wakeUpError } = useFetch<number>(
+  config.public.PUBLIC_BACKEND_URL + "wake_up"
+);
+
+if (taskError.value) {
   throw createError({
     statusCode: 404,
-    message: "failed to tasks",
+    message: "failed to fetch tasks",
+  });
+} else if (wakeUpError.value) {
+  throw createError({
+    statusCode: 404,
+    message: "failed to fetch wakeUpTime",
   });
 }
-
-// 起床時間の取得
-const wakeUpTime = useFetch<Actives>(
-  config.public.PUBLIC_BACKEND_URL + "actives"
-);
 </script>
 <template>
   <main class="relative h-screen overflow-hidden font-mono bg-white">
@@ -126,7 +131,7 @@ const wakeUpTime = useFetch<Actives>(
           <h2
             class="max-w-3xl py-2 mx-auto text-5xl font-bold text-gray-800 md:text-3xl"
           >
-            WakeUpTime　　{{ "20:00" }}
+            WakeUpTime　　{{ wakeUpTime }}
           </h2>
           <div class="inline-block relative w-72 mt-10">
             <select
