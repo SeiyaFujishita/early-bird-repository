@@ -1,7 +1,42 @@
 <script setup lang="ts">
-const name = ref("");
+import { User } from "~/types/user";
+import { WakeUp } from "~~/types/wake_up";
+
+const router = useRouter();
 const submit = () => {
   console.log("submit!");
+};
+
+const WakeUp = reactive<WakeUp>({
+  time: undefined,
+  name: "",
+});
+
+const config = useRuntimeConfig();
+const getWakeUptime = () => {
+  WakeUp.time = new Date("2022-08-18 14:58:00");
+  const getFormattedDate = (time: Date): string =>
+    time.toISOString().split("T")[0];
+  getFormattedDate(WakeUp.time);
+  console.log(getFormattedDate(WakeUp.time));
+};
+
+const save = () => {
+  getWakeUptime();
+  const { error } = useFetch<WakeUp>(
+    config.public.PUBLIC_BACKEND_URL + "wake_ups",
+    {
+      method: "POST",
+      body: WakeUp,
+    }
+  );
+  debugger;
+  if (error.value) {
+    return alert("入力値が不正です。");
+  }
+
+  debugger;
+  router.push("/record");
 };
 </script>
 <template>
@@ -30,7 +65,7 @@ const submit = () => {
           <form @submit.prevent>
             <label>
               <input
-                v-model="name"
+                v-model="WakeUp.name"
                 placeholder="名前を入力してください"
                 type="text"
                 class="text-center"
@@ -43,6 +78,7 @@ const submit = () => {
           <Crousel />
           <div class="flex items-center justify-center mt-4">
             <NuxtLink
+              @click="save()"
               to="http://localhost:3000/record"
               class="px-4 py-2 my-2 text-gray-800 uppercase bg-transparent border-2 border-gray-800 md:mt-16 hover:bg-gray-800 hover:text-white text-md"
             >
