@@ -1,9 +1,9 @@
 package usecase
 
 import (
-	"fmt"
 	"backend/domain/model"
 	"backend/domain/repository"
+	"fmt"
 	"log"
 	"net/http"
 
@@ -33,7 +33,7 @@ func (u *WakeUpUsecase) CreateWakeUp(c *gin.Context) {
 		c.String(http.StatusBadRequest, err.Error())
 		return
 	}
-	
+
 	fmt.Println("------------------------")
 	fmt.Printf("%+v\n", wakeUp)
 	fmt.Println("------------------------")
@@ -49,3 +49,5 @@ func (u *WakeUpUsecase) CreateWakeUp(c *gin.Context) {
 
 	c.JSON(http.StatusOK, nil)
 }
+
+func (u *WakeUpUsecase) GetWakeUpTime(c *gin.Context) {}
