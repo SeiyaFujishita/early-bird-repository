@@ -52,6 +52,7 @@ func (u *WakeUpUsecase) CreateWakeUp(c *gin.Context) {
 }
 
 func (u *WakeUpUsecase) GetWakeUpTime(c *gin.Context) {
+	// TODO:フロントから送られてくるUserIdを取得したい
 	id, err := strconv.Atoi((c.Param("user_id")))
 
 	if err != nil {

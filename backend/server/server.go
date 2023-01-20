@@ -17,5 +17,5 @@ func NewApiServer(router *gin.Engine, repos repository.Repositories) {
 	router.POST("/wake_ups", func(c *gin.Context) { WakeUpUsecase.CreateWakeUp(c) })
 	router.POST("/actives", func(c *gin.Context) { activeUsecase.CreateActive(c) })
 	router.POST("/user", func(c *gin.Context) { userUsecase.CreateUser(c) })
-	router.GET("/wake_ups", func(c *gin.Context) { WakeUpUsecase.GetWakeUpTime(c) })
+	router.GET("/wake_up", func(c *gin.Context) { WakeUpUsecase.GetWakeUpTime(c) })
 }
