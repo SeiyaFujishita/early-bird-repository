@@ -6,7 +6,6 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-	"strconv"
 
 	"github.com/gin-gonic/gin"
 	"github.com/gin-gonic/gin/binding"
@@ -53,13 +52,14 @@ func (u *WakeUpUsecase) CreateWakeUp(c *gin.Context) {
 
 func (u *WakeUpUsecase) GetWakeUpTime(c *gin.Context) {
 	// TODO:フロントから送られてくるUserIdを取得したい
-	id, err := strconv.Atoi((c.Param("user_id")))
+	// id, err := strconv.Atoi((c.Param("user_id")))
+	id := 0
 
-	if err != nil {
-		log.Print(err)
-		c.String(http.StatusBadRequest, err.Error())
-		return
-	}
+	// if err != nil {
+	// 	log.Print(err)
+	// 	c.String(http.StatusBadRequest, err.Error())
+	// 	return
+	// }
 
 	time, err := u.WakeUpRepository.GetWakeUpTime(id)
 
