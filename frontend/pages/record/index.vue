@@ -1,20 +1,25 @@
 <script setup lang="ts">
 import { Task } from "~/types/task";
 import { Actives } from "~~/types/actives";
+import { StopWatch } from "~~/types/stopWatch";
 
 const router = useRouter();
-const time = ref(0);
-const status = ref(0);
-const startTime = ref(0);
-const stopTime = ref(0);
-const timer = ref(0);
+
+const stopWatch: StopWatch = {
+  time: ref(0),
+  status: ref(0),
+  startTime: ref(0),
+  stopTime: ref(0),
+  timer: ref(0),
+};
+
 const getTimeStr = () => {
   // 1秒 = 1000ミリ秒
   // 1分 = 60 * 1000ミリ秒
   // 1時間 = 60 * 60 * 1000ミリ秒
-  const calcSeconds = Math.floor((time.value / 1000) % 60);
-  const calcMinutes = Math.floor((time.value / (60 * 1000)) % 60);
-  const calcHours = Math.floor(time.value / (60 * 60 * 1000));
+  const calcSeconds = Math.floor((stopWatch.time.value / 1000) % 60);
+  const calcMinutes = Math.floor((stopWatch.time.value / (60 * 1000)) % 60);
+  const calcHours = Math.floor(stopWatch.time.value / (60 * 60 * 1000));
 
   const seconds = ("0" + calcSeconds).slice(-2);
   const minutes = ("0" + calcMinutes).slice(-2);
@@ -24,34 +29,35 @@ const getTimeStr = () => {
 };
 
 const start = () => {
-  status.value = 1;
+  stopWatch.status.value = 1;
 
-  if (startTime.value === 0) {
-    startTime.value = Date.now();
+  if (stopWatch.startTime.value === 0) {
+    stopWatch.startTime.value = Date.now();
   }
 
   const checkTime = () => {
-    time.value = Date.now() - startTime.value + stopTime.value;
+    stopWatch.time.value =
+      Date.now() - stopWatch.startTime.value + stopWatch.stopTime.value;
   };
-  timer.value = window.setInterval(checkTime, 10);
+  stopWatch.timer.value = window.setInterval(checkTime, 10);
 };
 
 const stop = () => {
-  if (timer.value) {
-    clearInterval(timer.value);
+  if (stopWatch.timer.value) {
+    clearInterval(stopWatch.timer.value);
   }
 
-  status.value = 2;
-  startTime.value = 0;
-  stopTime.value = time.value;
+  stopWatch.status.value = 2;
+  stopWatch.startTime.value = 0;
+  stopWatch.stopTime.value = stopWatch.time.value;
 };
 
 const reset = () => {
   stop();
-  status.value = 0;
-  time.value = 0;
-  startTime.value = 0;
-  stopTime.value = 0;
+  stopWatch.status.value = 0;
+  stopWatch.time.value = 0;
+  stopWatch.startTime.value = 0;
+  stopWatch.stopTime.value = 0;
 };
 
 const active = reactive<Actives>({
@@ -62,7 +68,7 @@ const active = reactive<Actives>({
 
 const save = () => {
   // ストップウォッチの時間とタスクを保存
-  active.time = Math.floor((time.value / 1000) % 60);
+  active.time = Math.floor((stopWatch.time.value / 1000) % 60);
 
   if (active.time == 0) {
     return alert("時間を計測してください。");
@@ -83,14 +89,35 @@ const save = () => {
 };
 
 const config = useRuntimeConfig();
-const { data: tasks, error } = useFetch<Task[]>(
+const { data: tasks, error: taskError } = useFetch<Task[]>(
   config.public.PUBLIC_BACKEND_URL + "tasks"
 );
 
-if (error.value) {
+// 起床時間の取得
+const { data: wakeUpTime, error: wakeUpError } = useFetch<number>(
+  // "wakeup",
+  // () =>
+  //   $fetch(config.public.PUBLIC_BACKEND_URL + "wake_up", {
+  //     method: "GET",
+  //     params: { id: 1 },
+  //   })
+  config.public.PUBLIC_BACKEND_URL + "wake_up",
+  {
+    params: {
+      // userIdを取得
+      id: 1,
+    },
+  }
+);
+if (taskError.value) {
   throw createError({
     statusCode: 404,
-    message: "failed to tasks",
+    message: "failed to fetch tasks",
+  });
+} else if (wakeUpError.value) {
+  throw createError({
+    statusCode: 404,
+    message: "failed to fetch wakeUpTime",
   });
 }
 </script>
@@ -121,7 +148,7 @@ if (error.value) {
           <h2
             class="max-w-3xl py-2 mx-auto text-5xl font-bold text-gray-800 md:text-3xl"
           >
-            WakeUpTime　　{{ "20:00" }}
+            WakeUpTime　　{{ wakeUpTime }}
           </h2>
           <div class="inline-block relative w-72 mt-10">
             <select
@@ -151,7 +178,7 @@ if (error.value) {
           </div>
           <div class="flex items-center justify-center">
             <button
-              v-if="status !== 1"
+              v-if="stopWatch.status.value !== 1"
               @click="start()"
               class="px-4 py-2 m-2 text-gray-800 uppercase bg-transparent border-2 border-gray-800 mt-6 hover:bg-gray-800 hover:text-white text-md"
             >
