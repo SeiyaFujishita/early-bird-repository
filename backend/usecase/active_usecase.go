@@ -1,7 +1,6 @@
 package usecase
 
 import (
-	"fmt"
 	"backend/domain/model"
 	"backend/domain/repository"
 	"log"
@@ -25,9 +24,7 @@ func (u *ActiveUsecase) CreateActive(c *gin.Context) {
 	active := &model.Active{}
 
 	err := c.ShouldBindWith(active, binding.JSON)
-	fmt.Println("------------------------")
-	fmt.Printf("%+v\n", err)
-	fmt.Println("------------------------")
+
 	if err != nil {
 		log.Print(err)
 		c.String(http.StatusBadRequest, err.Error())
