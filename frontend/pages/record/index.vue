@@ -95,12 +95,6 @@ const { data: tasks, error: taskError } = useFetch<Task[]>(
 
 // 起床時間の取得
 const { data: wakeUpTime, error: wakeUpError } = useFetch<number>(
-  // "wakeup",
-  // () =>
-  //   $fetch(config.public.PUBLIC_BACKEND_URL + "wake_up", {
-  //     method: "GET",
-  //     params: { id: 1 },
-  //   })
   config.public.PUBLIC_BACKEND_URL + "wake_up",
   {
     params: {
