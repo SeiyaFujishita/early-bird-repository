@@ -1,4 +1,4 @@
-package work
+package user
 
 import (
 	"backend/domain/repository"

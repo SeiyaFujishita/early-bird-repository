@@ -10,6 +10,7 @@ import (
 
 	"backend/infra/repository/active"
 	"backend/infra/repository/task"
+	"backend/infra/repository/user"
 	"backend/infra/repository/wakeup"
 
 	"github.com/gin-contrib/cors"
@@ -33,6 +34,7 @@ func main() {
 		TaskRepository:   task.NewTaskRepository(gormHandler),
 		ActiveRepository: active.NewActiveRepository(gormHandler),
 		WakeUpRepository: wakeup.NewWakeUpRepository(gormHandler),
+		UserRepository:   user.NewUserRepository(gormHandler),
 	}
 
 	// gin(フレームワーク)の初期化(https://gin-gonic.com/ja/)
