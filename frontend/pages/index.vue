@@ -65,19 +65,6 @@ const save = () => {
       <div
         class="container relative flex flex-col items-center justify-between px-6 py-4 mx-auto"
       >
-        <div class="mb-12 border-2 border-gray-800">
-          <form @submit.prevent>
-            <label>
-              <input
-                v-model="WakeUp.name"
-                placeholder="名前を入力してください"
-                type="text"
-                class="text-center"
-                @keyup.enter="submit"
-              />
-            </label>
-          </form>
-        </div>
         <div class="flex flex-col">
           <Crousel />
           <div class="flex items-center justify-center mt-4">
