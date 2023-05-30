@@ -2,10 +2,6 @@
 import { User } from "~/types/user";
 import { WakeUp } from "~~/types/wake_up";
 
-import { Carousel, initTE } from "tw-elements";
-
-initTE({ Carousel });
-
 const router = useRouter();
 const submit = () => {
   console.log("submit!");
